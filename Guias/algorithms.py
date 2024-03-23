@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Ejercicio 1
 def senoidal (tini, tfin, fs, fm, A, phi):
     """ Ejercicio 1.1 - Generar senial senoidal discreta
 
@@ -50,3 +51,41 @@ def square(tini, tfin, fs, fm, phi):
     y = np.sign(np.sin(2 * np.pi * fs * t + phi))
     
     return t, y
+
+# Ejercicio 2
+def invertir(y):
+    """Ejercicio 2.1 Funcion que invierte una señal
+
+    Args:
+        y (NDArray[signedinteger[Any]]): señal
+    """
+    
+    yinv = -y
+    return yinv
+
+def rectificar(y):
+    """Ejercicio 2.2 Funcion que rectifica una señal
+
+    Args:
+        y (NDArray[signedinteger[Any]]): senial
+    """
+    
+    yrect = y
+    for i in range(len(yrect)):
+        if yrect[i] < 0:
+            yrect[i] = 0
+    
+    return yrect
+
+def cuantificar(y,N):
+    """Ejercicio 2.3 Funcion que cuantifica en 8 niveles
+
+    Args:
+        y (NDArray[signedinteger[Any]]): senial
+        N (signedinteger): niveles
+    """
+    min_elem = min(y)
+    H = (max(y)-min_elem)/(N-1)
+    yquant = np.round((y-min_elem)/H)*H + min_elem
+    
+    return yquant
