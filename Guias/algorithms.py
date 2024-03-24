@@ -78,7 +78,7 @@ def rectificar(y):
     return yrect
 
 def cuantificar(y,N):
-    """Ejercicio 2.3 Funcion que cuantifica en 8 niveles
+    """Ejercicio 2.3 Funcion que cuantifica en N niveles
 
     Args:
         y (NDArray[signedinteger[Any]]): senial
@@ -89,3 +89,91 @@ def cuantificar(y,N):
     yquant = np.round((y-min_elem)/H)*H + min_elem
     
     return yquant
+
+def Iescalon(t):
+    """Funcion interpolante escalon
+
+    Args:
+        t (float): valor
+
+    Returns:
+        float: imagen
+    """
+    if 0 <= t and t < 1:
+        return 1
+    return 0
+
+def Ilineal(t):
+    """Funcion interpolante lineal
+
+    Args:
+        t (float): t
+
+    Returns:
+        float: x
+    """
+    if np.abs(t) < 1:
+        return 1-np.abs(t)
+    return 0
+
+def Isinc(t):
+    """Funcion interpolante sinc
+
+    Args:
+        t (float): t
+
+    Returns:
+        float: x
+    """
+    if t == 0:
+        return 1
+    return np.sin(np.pi * 0.5 * t)/(np.pi * 0.5 * t)
+
+def interpolar(m, Ti, T, y, I):
+    """Funcion interpoladora
+
+    Args:
+        m (signedinteger): indice de la senial interpolada
+        Ti (float): periodo de la senial interpolada
+        T (float): periodo de la senial original
+        y (NDArray[signedinteger[Any]]): valores de la funcion original
+        I (function): funcion interpolante
+
+    Returns:
+        float: x(mTi) valor de la funcion interpolada
+    """
+    sum = 0
+    for n in range(len(y)):
+        sum += y[n] * I((m * Ti - n * T) / T)
+    return sum
+
+def interpolar4X(t,y,interpolacion):
+    """Funcion para sobremuestrar senial x4 usando interpolacion
+
+    Args:
+        t (NDArray[signedinteger[Any]]): dominio
+        y (NDArray[signedinteger[Any]]): imagen (senial)
+        interpolacion (function): funcion interpolante
+
+    Returns:
+        {NDArray[signedinteger[Any]], NDArray[signedinteger[Any]]}: ti, yi
+    """
+    T = (max(t)-min(t))/len(t)
+    Ti = (max(t)-min(t))/(4 * len(t))
+    ti = np.arange(min(t),max(t),Ti)
+    yi = [0]*len(ti)
+    for m in range(len(ti)):
+        yi[m] = interpolar(m,Ti,T,y,interpolacion)
+    return ti, yi
+
+def potencia(y):
+    """Calcular potencia de una senial
+
+    Args:
+        y (NDArray[signedinteger[Any]]): senial discreta
+    """
+    sum = 0
+    for i in range(len(y)):
+        sum += np.power(y[i],2)
+    return sum/len(y)
+    
