@@ -250,3 +250,6 @@ print("SNRnuevo = ", alg.potencia(y)/alg.potencia(yr))
 
 plt.show()
 
+# el valor de potencia del ruido para que la SNR resultante
+# sea de 0 dB debe ser igual a la potencia de la senial
+# log(1) = 0
