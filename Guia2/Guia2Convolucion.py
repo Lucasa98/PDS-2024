@@ -69,3 +69,63 @@ plt.title("convCirc")
 plt.show()
 """
 
+# Ejercicio 3
+a1 = 0.1
+a2 = 0.5
+a3 = 0.9
+
+t = np.arange(-1, 1, 1/10)
+
+x1 = [0]*(len(t))
+x1[10] = a1
+x1[11] = 1
+x2 = [0]*(len(t))
+x2[10] = a2
+x2[11] = 1
+x3 = [0]*(len(t))
+x3[10] = a3
+x3[11] = 1
+
+hA1 = [0]*len(x1)
+for i in range(len(hA1)):
+    hA1[i] = np.sin(8*x1[i])
+y1 = [0]*len(hA1)
+for i in range(len(y1)):
+    y1[i] = np.power(a1,hA1[i])
+
+hA2 = [0]*len(x2)
+for i in range(len(hA2)):
+    hA2[i] = np.sin(8*x2[i])
+y2 = [0]*len(hA2)
+for i in range(len(y2)):
+    y2[i] = np.power(a2,hA2[i])
+
+hA3 = [0]*len(x3)
+for i in range(len(hA3)):
+    hA3[i] = np.sin(8*x3[i])
+y3 = [0]*len(hA3)
+for i in range(len(y3)):
+    y3[i] = np.power(a3,hA3[i])
+
+print(len(t))
+print(len(y1))
+print(len(y2))
+print(len(y3))
+
+plt.subplot(2,3,1)
+plt.stem(t,x1)
+plt.title("a1 = 0.1")
+plt.subplot(2,3,2)
+plt.stem(t,x2)
+plt.title("a2 = 0.5")
+plt.subplot(2,3,3)
+plt.stem(t,x3)
+plt.title("a3 = 0.9")
+plt.subplot(2,3,4)
+plt.plot(t,y1)
+plt.subplot(2,3,5)
+plt.plot(t,y2)
+plt.subplot(2,3,6)
+plt.plot(t,y3)
+
+plt.show()
