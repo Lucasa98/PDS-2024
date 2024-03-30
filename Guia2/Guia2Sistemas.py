@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Ejercicio 1
-"""
 t1,x1 = alg.sin(-1,1,3,2,0,50)   # senial 1
 t2,x2 = alg.normal(-2,2,50)      # senial 2
 
@@ -23,18 +22,29 @@ y11 = x1 * x1
 y12 = xaux * x2
 
 # 1.2
-#
-'''
+# no causal, lineal, 
+no = 10
 y21 = [0]*len(t1)
-for n in range(len(y21)):
+for n in range(no+1):
+    for k in range(0,n+no+1):
+        y21[n] += x1[k]
+for n in range(no+1,len(y21)-no):
     for k in range(n-no,n+no+1):
+        y21[n] += x1[k]
+for n in range(len(y21)-no,len(y21)):
+    for k in range(n-no,len(y21)):
         y21[n] += x1[k]
 
 y22 = [0]*len(t2)
-for n in range(len(y22)):
+for n in range(no+1):
+    for k in range(0,n+no+1):
+        y22[n] += x2[k]
+for n in range(no+1,len(y22)-no):
     for k in range(n-no,n+no+1):
         y22[n] += x2[k]
-'''
+for n in range(len(y22)-no,len(y22)):
+    for k in range(n-no,len(y22)):
+        y22[n] += x2[k]
 
 # 1.3
 # causal, no-lineal, invariable en el tiempo, sin memoria
@@ -60,12 +70,10 @@ markerline, stemline, baseline, = ax.stem(t1,y11)
 plt.setp(stemline, linewidth = 1)
 plt.setp(markerline, markersize = 3)
 
-'''
 ax = plt.subplot2grid((4, 4), (1, 1))
 markerline, stemline, baseline, = ax.stem(t1,y21)
 plt.setp(stemline, linewidth = 1)
 plt.setp(markerline, markersize = 3)
-'''
 
 ax = plt.subplot2grid((4, 4), (1, 2))
 markerline, stemline, baseline, = ax.stem(t1,y31)
@@ -86,12 +94,10 @@ markerline, stemline, baseline, = ax.stem(t2,y12)
 plt.setp(stemline, linewidth = 1)
 plt.setp(markerline, markersize = 3)
 
-'''
 ax = plt.subplot2grid((4, 4), (3, 1))
 markerline, stemline, baseline, = ax.stem(t2,y22)
 plt.setp(stemline, linewidth = 1)
 plt.setp(markerline, markersize = 3)
-'''
 
 ax = plt.subplot2grid((4, 4), (3, 2))
 markerline, stemline, baseline, = ax.stem(t2,y32)
@@ -104,7 +110,6 @@ plt.setp(stemline, linewidth = 1)
 plt.setp(markerline, markersize = 3)
 
 plt.show()
-"""
 
 # Ejercicio 2
 """
@@ -158,7 +163,7 @@ plt.stem(t,y2)
 
 plt.show()
 """
-
+"""
 # Ejercicio 4
 t = np.arange(-1,1-1/50,1/50)
 x = [0]*len(t)
@@ -186,3 +191,4 @@ plt.subplot(4,1,4)
 plt.stem(t,y3)
 
 plt.show()
+"""
