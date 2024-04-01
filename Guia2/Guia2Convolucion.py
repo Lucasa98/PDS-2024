@@ -86,46 +86,62 @@ x3 = [0]*(len(t))
 x3[10] = a3
 x3[11] = 1
 
+# --------graficas--------
+f, ((ax1,ax2,ax3),(ax4,ax5,ax6),(ax7,ax8,ax9)) = plt.subplots(3,3,sharex=True, sharey=True)
+# ------------------------
+
+
+# X
+ax1.stem(t,x1)
+ax1.set_ylabel("x[n]")
+ax1.set_title("a = 0.1")
+ax2.stem(t,x2)
+ax2.set_title("a = 0.5")
+ax3.stem(t,x3)
+ax3.set_title("a = 0.9")
+
+# w1
 hA1 = [0]*len(x1)
 for i in range(len(hA1)):
     hA1[i] = np.sin(8*x1[i])
+
+ax4.stem(t,hA1)
+ax4.set_ylabel("w[n]")
+
+# y1
 y1 = [0]*len(hA1)
 for i in range(len(y1)):
     y1[i] = np.power(a1,hA1[i])
 
+ax7.plot(t,y1)
+ax7.set_ylabel("y[n]")
+
+# w2
 hA2 = [0]*len(x2)
 for i in range(len(hA2)):
     hA2[i] = np.sin(8*x2[i])
+
+ax5.stem(t,hA2)
+
+# y2
 y2 = [0]*len(hA2)
 for i in range(len(y2)):
     y2[i] = np.power(a2,hA2[i])
 
+ax8.plot(t,y2)
+
+# w3
 hA3 = [0]*len(x3)
 for i in range(len(hA3)):
     hA3[i] = np.sin(8*x3[i])
+
+ax6.stem(t,hA3)
+
+# y3
 y3 = [0]*len(hA3)
 for i in range(len(y3)):
     y3[i] = np.power(a3,hA3[i])
 
-print(len(t))
-print(len(y1))
-print(len(y2))
-print(len(y3))
-
-plt.subplot(2,3,1)
-plt.stem(t,x1)
-plt.title("a1 = 0.1")
-plt.subplot(2,3,2)
-plt.stem(t,x2)
-plt.title("a2 = 0.5")
-plt.subplot(2,3,3)
-plt.stem(t,x3)
-plt.title("a3 = 0.9")
-plt.subplot(2,3,4)
-plt.plot(t,y1)
-plt.subplot(2,3,5)
-plt.plot(t,y2)
-plt.subplot(2,3,6)
-plt.plot(t,y3)
+ax9.plot(t,y3)
 
 plt.show()
