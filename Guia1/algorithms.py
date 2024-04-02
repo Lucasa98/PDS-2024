@@ -148,13 +148,7 @@ def interpolar(m, Ti, T, y, I):
         float: x(mTi) valor de la funcion interpolada
     """
     sum = 0
-    if I == Iescalon and m<30:
-        print("----------------------------------")
-        print("m = ",m)
-        print("n    |mTi - nT | /T  | I")
     for n in range(len(y)-1):               # n: numero de muestra en la senial original
-        if I == Iescalon and m<30:
-            print(n, "  |", m*Ti-n*T, " |", (m*Ti-n*T)/T,"    |", I((m*Ti-n*T)/T))
         sum += y[n] * I(round((m * Ti - n * T) / T))
     return sum
 

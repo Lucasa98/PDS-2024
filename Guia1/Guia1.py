@@ -143,10 +143,6 @@ f, (ax1,ax2,ax3) = plt.subplots(3,1,sharex=True)
 t, y = alg.senoidal(0,2,2,10,2,0)
 
 ti,yi = alg.interpolar4X(t,y,alg.Iescalon)
-#----------------------------
-for i in range(len(yi)):
-    print(i, "  ", yi[i])
-#----------------------------
 ax1.stem(t,y)
 markerline, stemlines, baseline = ax1.stem(ti,yi, linefmt='grey', markerfmt='D')
 markerline.set_markerfacecolor('none')
