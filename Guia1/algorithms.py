@@ -90,6 +90,11 @@ def cuantificar(y,N):
     
     return yquant
 
+def round(t):
+    if t > 0.999999:
+        return 1.0
+    return t
+
 def Iescalon(t):
     """Funcion interpolante escalon
 
@@ -133,18 +138,24 @@ def interpolar(m, Ti, T, y, I):
     """Funcion interpoladora
 
     Args:
-        m (signedinteger): indice de la senial interpolada
-        Ti (float): periodo de la senial interpolada
-        T (float): periodo de la senial original
-        y (NDArray[signedinteger[Any]]): valores de la funcion original
-        I (function): funcion interpolante
+        m (signedinteger):                  numero de muestra en la senial interpolada
+        Ti (float):                         periodo de la senial interpolada
+        T (float):                          periodo de la senial original
+        y (NDArray[signedinteger[Any]]):    valores de la funcion original
+        I (function):                       funcion interpolante
 
     Returns:
         float: x(mTi) valor de la funcion interpolada
     """
     sum = 0
-    for n in range(len(y)):
-        sum += y[n] * I((m * Ti - n * T) / T)
+    if I == Iescalon and m<30:
+        print("----------------------------------")
+        print("m = ",m)
+        print("n    |mTi - nT | /T  | I")
+    for n in range(len(y)-1):               # n: numero de muestra en la senial original
+        if I == Iescalon and m<30:
+            print(n, "  |", m*Ti-n*T, " |", (m*Ti-n*T)/T,"    |", I((m*Ti-n*T)/T))
+        sum += y[n] * I(round((m * Ti - n * T) / T))
     return sum
 
 def interpolar4X(t,y,interpolacion):
@@ -158,9 +169,9 @@ def interpolar4X(t,y,interpolacion):
     Returns:
         {NDArray[signedinteger[Any]], NDArray[signedinteger[Any]]}: ti, yi
     """
-    T = (max(t)-min(t))/len(t)
-    Ti = (max(t)-min(t))/(4 * len(t))
-    ti = np.arange(min(t),max(t),Ti)
+    T = t[1]-t[0]                       # periodo original
+    Ti = T/4                            # periodo de la interpolacion
+    ti = np.arange(min(t),max(t),Ti)    # muestreo de la interpolacion (4x)
     yi = [0]*len(ti)
     for m in range(len(ti)):
         yi[m] = interpolar(m,Ti,T,y,interpolacion)

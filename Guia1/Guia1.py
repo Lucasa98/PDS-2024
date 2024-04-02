@@ -137,33 +137,34 @@ plt.show()
 '''
 
 # Ejercicio 6
-'''
+
+f, (ax1,ax2,ax3) = plt.subplots(3,1,sharex=True)
+
 t, y = alg.senoidal(0,2,2,10,2,0)
-ax = plt.subplot(2,2,1)
-plt.title("original")
-plt.stem(t,y)
-ax.spines.bottom.set_position('zero')
 
 ti,yi = alg.interpolar4X(t,y,alg.Iescalon)
-ax = plt.subplot(2,2,2)
-plt.title("Iescalon")
-plt.plot(ti,yi)
-ax.spines.bottom.set_position('zero')
+#----------------------------
+for i in range(len(yi)):
+    print(i, "  ", yi[i])
+#----------------------------
+ax1.stem(t,y)
+markerline, stemlines, baseline = ax1.stem(ti,yi, linefmt='grey', markerfmt='D')
+markerline.set_markerfacecolor('none')
+ax1.set_title("Iescalon")
 
 ti,yi = alg.interpolar4X(t,y,alg.Ilineal)
-ax = plt.subplot(2,2,3)
-plt.title("ILineal")
-plt.plot(ti,yi)
-ax.spines.bottom.set_position('zero')
+ax2.stem(t,y)
+markerline, stemlines, baseline = ax2.stem(ti,yi, linefmt='grey', markerfmt='D')
+markerline.set_markerfacecolor('none')
+ax2.set_title("ILineal")
 
 ti,yi = alg.interpolar4X(t,y,alg.Isinc)
-ax = plt.subplot(2,2,4)
-plt.title("Isinc")
-plt.plot(ti,yi)
-ax.spines.bottom.set_position('zero')
+ax3.stem(t,y)
+markerline, stemlines, baseline = ax3.stem(ti,yi, linefmt='grey', markerfmt='D')
+markerline.set_markerfacecolor('none')
+ax3.set_title("Isinc")
 
 plt.show()
-'''
 
 # ejercicio 7
 '''
@@ -225,6 +226,7 @@ plt.show()
 '''
 
 # Ejercicio 8
+'''
 t, y = alg.senoidal(0,2,3,100,2,0)
 yr = np.random.rand(len(t))-0.5
 
@@ -253,3 +255,4 @@ plt.show()
 # el valor de potencia del ruido para que la SNR resultante
 # sea de 0 dB debe ser igual a la potencia de la senial
 # log(1) = 0
+'''
