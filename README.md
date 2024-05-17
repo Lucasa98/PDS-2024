@@ -1,3 +1,4 @@
 # Digital Signal Processing
-![Signal stats](https://github.com/Lucasa98/PDS-2024/blob/main/Guia1/Ejercicio7.png)
+
+![Signal stats](Guia2\convolution.png)
 Course from Ingeniería en Informática (UNL-FICH 2024)
